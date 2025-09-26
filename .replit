@@ -1,6 +1,21 @@
+run = "npm run dev -- --host"
+hidden = [".config", ".git", ".gitignore"]
+entrypoint = "index.html"
 modules = ["nodejs-20", "web"]
+
 [agent]
 expertMode = true
 
 [nix]
-channel = "stable-25_05"
+channel = "stable-24_11"
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
+
+[deployment]
+run = ["sh", "-c", "npm run build && npm run preview -- --host"]
+deploymentTarget = "static"
+publicDir = "dist"

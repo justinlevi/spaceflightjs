@@ -212,7 +212,11 @@ function updateAsteroids(deltaTime) {
   for (let i = asteroids.length - 1; i >= 0; i--) {
     const asteroid = asteroids[i];
 
-    asteroid.position.z += ASTEROID_SPEED * deltaTime * 60;
+    const asteroidSpeed = keys[' '] ? ASTEROID_SPEED * BOOST_MULTIPLIER : ASTEROID_SPEED;
+asteroid.position.z += asteroidSpeed * deltaTime * 60;
+
+
+    asteroid.position.z += asteroidSpeed * deltaTime * 60;
 
     asteroid.rotation.x += asteroid.userData.rotationSpeed.x;
     asteroid.rotation.y += asteroid.userData.rotationSpeed.y;
@@ -284,7 +288,7 @@ function updateSpaceship(deltaTime) {
   spaceship.position.y = Math.max(-15, Math.min(15, spaceship.position.y));
 
   spaceship.rotation.z = -spaceshipVelocity.x * 0.1;
-  spaceship.rotation.x = -spaceshipVelocity.y * 0.1;
+  spaceship.rotation.x = spaceshipVelocity.y * 0.1;
 
   camera.position.x = spaceship.position.x * 0.3;
   camera.position.y = spaceship.position.y * 0.3 + 5;
